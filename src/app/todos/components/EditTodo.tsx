@@ -1,11 +1,11 @@
-"use client";
-import { Suspense } from "react";
-import updateTodo from "../mutations/updateTodo";
-import getTodo from "../queries/getTodo";
-import { UpdateTodoSchema } from "../schemas";
-import { FORM_ERROR, TodoForm } from "./TodoForm";
-import { useMutation, useQuery } from "@blitzjs/rpc";
-import { useRouter } from "next/navigation";
+"use client"
+import { Suspense } from "react"
+import updateTodo from "../mutations/updateTodo"
+import getTodo from "../queries/getTodo"
+import { UpdateTodoSchema } from "../schemas"
+import { FORM_ERROR, TodoForm } from "./TodoForm"
+import { useMutation, useQuery } from "@blitzjs/rpc"
+import { useRouter } from "next/navigation"
 
 export const EditTodo = ({ todoId }: { todoId: number }) => {
   const [todo, { setQueryData }] = useQuery(
@@ -15,14 +15,17 @@ export const EditTodo = ({ todoId }: { todoId: number }) => {
       // This ensures the query never refreshes and overwrites the form data while the user is editing.
       staleTime: Infinity,
     }
-  );
-  const [updateTodoMutation] = useMutation(updateTodo);
-  const router = useRouter();
+  )
+  const [updateTodoMutation] = useMutation(updateTodo)
+  const router = useRouter()
   return (
     <>
       <div>
+        <h1 className="text-gray-800 font-bold text-2xl uppercase">Project {todo.id}</h1>
         <h1>Edit Todo {todo.id}</h1>
+        <hr className="my-2" />
         <pre>{JSON.stringify(todo, null, 2)}</pre>
+        <hr className="my-2" />
         <Suspense fallback={<div>Loading...</div>}>
           <TodoForm
             submitText="Update Todo"
@@ -33,19 +36,19 @@ export const EditTodo = ({ todoId }: { todoId: number }) => {
                 const updated = await updateTodoMutation({
                   ...values,
                   id: todo.id,
-                });
-                await setQueryData(updated);
-                router.refresh();
+                })
+                await setQueryData(updated)
+                router.refresh()
               } catch (error: any) {
-                console.error(error);
+                console.error(error)
                 return {
                   [FORM_ERROR]: error.toString(),
-                };
+                }
               }
             }}
           />
         </Suspense>
       </div>
     </>
-  );
-};
+  )
+}

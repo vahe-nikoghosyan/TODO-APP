@@ -7,8 +7,7 @@ export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElem
   name: string
   /** Field label. */
   label: string
-  /** Field type. Doesn't include radio buttons and checkboxes */
-  type?: "text" | "password" | "email" | "number"
+  type?: "text" | "password" | "email" | "number" | "checkbox"
   outerProps?: PropsWithoutRef<JSX.IntrinsicElements["div"]>
   labelProps?: ComponentPropsWithoutRef<"label">
 }
@@ -22,9 +21,18 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
 
     return (
       <div {...outerProps}>
-        <label {...labelProps}>
+        <label {...labelProps} className="my-4">
           {label}
-          <input disabled={isSubmitting} {...register(name)} {...props} />
+          <input
+            disabled={isSubmitting}
+            {...register(name)}
+            {...props}
+            className={
+              props.type !== "checkbox"
+                ? "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                : ""
+            }
+          />
         </label>
 
         <ErrorMessage
@@ -44,12 +52,19 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
             align-items: start;
             font-size: 1rem;
           }
-          input {
+          input[type="text"],
+          input[type="password"],
+          input[type="email"],
+          input[type="number"] {
             font-size: 1rem;
             padding: 0.25rem 0.5rem;
             border-radius: 3px;
             border: 1px solid purple;
             appearance: none;
+            margin-top: 0.5rem;
+          }
+          input[type="radio"],
+          input[type="checkbox"] {
             margin-top: 0.5rem;
           }
         `}</style>
