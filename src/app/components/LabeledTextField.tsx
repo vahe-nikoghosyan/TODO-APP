@@ -21,7 +21,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
 
     return (
       <div {...outerProps}>
-        <label {...labelProps} className="my-4">
+        <label {...labelProps} className="my-1">
           {label}
           <input
             disabled={isSubmitting}
@@ -37,7 +37,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
 
         <ErrorMessage
           render={({ message }) => (
-            <div role="alert" style={{ color: "red" }}>
+            <div role="alert" className="my-1 text-red-700">
               {message}
             </div>
           )}

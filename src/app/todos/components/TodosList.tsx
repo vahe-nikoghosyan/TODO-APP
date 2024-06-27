@@ -31,9 +31,8 @@ export const TodosList = () => {
   const pathname = usePathname()
 
   const handleToggleComplete = async (todo: Todo) => {
-    console.log("todo", todo)
     await updateTodoMutation({
-      id: todo.id,
+      ...todo,
       completed: !todo.completed,
     })
     await invalidateQuery(getTodos)
@@ -65,6 +64,7 @@ export const TodosList = () => {
         className="w-full max-w-sm mx-auto px-4 py-2"
         submitText="Create Todo"
         schema={CreateTodoSchema}
+        initialValues={{ completed: false }}
         onSubmit={async (values) => {
           try {
             const todo = await createTodoMutation(values)
@@ -91,7 +91,7 @@ export const TodosList = () => {
                   onChange={() => handleToggleComplete(todo)}
                 />
                 <Link href={`/todos/${todo.id}`}>
-                  <label htmlFor="todo1" className="ml-3 block text-gray-900 max-w-36">
+                  <label htmlFor="todo1" className="ml-3 block text-gray-900 max-w-32">
                     <span className="text-lg font-medium">{todo.name}</span>
                     <span className="text-sm font-light text-gray-500"> (ID: {todo.id})</span>
                   </label>

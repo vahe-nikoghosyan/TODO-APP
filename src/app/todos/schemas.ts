@@ -1,9 +1,8 @@
 import { z } from "zod"
 
 export const CreateTodoSchema = z.object({
-  name: z.string(),
+  name: z.string().min(1, "Name is required"),
   completed: z.boolean(),
-  // template: __fieldName__: z.__zodType__(),
 })
 export const UpdateTodoSchema = CreateTodoSchema.merge(
   z.object({

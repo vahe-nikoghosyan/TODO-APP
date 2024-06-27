@@ -1,177 +1,95 @@
-[![Blitz.js](https://raw.githubusercontent.com/blitz-js/art/master/github-cover-photo.png)](https://blitzjs.com)
+# My To-Do App
 
-This is a [Blitz.js](https://github.com/blitz-js/blitz) app.
+## Project Overview
 
-# ****name****
+This project is a simple to-do list application built with Blitz.js, Prisma ORM, and Tailwind CSS. It demonstrates full-stack development capabilities, including frontend and backend integration, database management, and styling.
 
-## Getting Started
+## Table of Contents
 
-Run your app in the development mode.
+- [Setup and Run](#setup-and-run)
+- [Architectural Choices](#architectural-choices)
+- [Challenges Faced](#challenges-faced)
 
+## Setup and Run
+
+### Prerequisites
+
+- Node.js (>=14.x)
+- npm (>=6.x) or yarn (>=1.x)
+
+### Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/vahe-nikoghosyan/TODO-APP.git
+   cd TODO-APP
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Set up the database:**
+
+   Ensure you have a `.env` file in the root of your project with the following content:
+
+   ```env
+   DATABASE_URL="file:./db.sqlite"
+   ```
+
+4. **Run Prisma migrations:**
+
+   ```bash
+   blitz prisma migrate dev --name init
+   ```
+
+5. **Start the development server:**
+
+   ```bash
+   blitz dev
+   ```
+
+6. **Open your browser and navigate to:**
+
+   ```
+   http://localhost:3000
+   ```
+
+## Architectural Choices
+
+### Blitz.js
+
+Blitz.js is chosen for its full-stack capabilities, which provide a seamless integration between frontend and backend. It abstracts much of the boilerplate associated with building a full-stack application, enabling rapid development.
+
+### Prisma ORM
+
+Prisma ORM is used for database management. It simplifies database interactions and migrations with a type-safe API, enhancing developer productivity and code reliability.
+
+### Tailwind CSS
+
+Tailwind CSS is chosen for styling due to its utility-first approach, which allows for rapid and consistent UI development. It provides a robust set of design utilities directly in the markup, reducing the need for custom CSS.
+
+## Challenges Faced
+
+### State Management and Validation
+
+Ensuring proper state management and validation across the form and database was a key challenge. This involved:
+
+- Implementing robust schema validation using Zod to prevent invalid data entries.
+- Managing form state and validation using `react-hook-form` to provide a seamless user experience.
+
+### CSS Styling
+
+Aligning elements consistently regardless of the text length required careful use of Tailwind CSS utilities and flexbox properties to maintain a clean and responsive layout.
+
+### Running the Application
 ```
-blitz dev
+After setting up the project and starting the development server, you can create, update, and delete to-do items using the provided UI. The to-do items will be stored in the SQLite database, and the UI will reflect changes in real-time.
+
+By following this documentation, you should have a clear understanding of how to set up, run, and develop the to-do list application. If you have any questions or run into issues, feel free to reach out for assistance.
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Environment Variables
-
-Ensure the `.env.local` file has required environment variables:
-
-```
-DATABASE_URL=postgresql://<YOUR_DB_USERNAME>@localhost:5432/todo-app
-```
-
-Ensure the `.env.test.local` file has required environment variables:
-
-```
-DATABASE_URL=postgresql://<YOUR_DB_USERNAME>@localhost:5432/todo-app_test
-```
-
-## Tests
-
-Runs your tests using Jest.
-
-```
-yarn test
-```
-
-Blitz comes with a test setup using [Vitest](https://vitest.dev/) and [react-testing-library](https://testing-library.com/).
-
-## Commands
-
-Blitz comes with a powerful CLI that is designed to make development easy and fast. You can install it with `npm i -g blitz`
-
-```
-  blitz [COMMAND]
-
-  dev       Start a development server
-  build     Create a production build
-  start     Start a production server
-  export    Export your Blitz app as a static application
-  prisma    Run prisma commands
-  generate  Generate new files for your Blitz project
-  console   Run the Blitz console REPL
-  install   Install a recipe
-  help      Display help for blitz
-  test      Run project tests
-```
-
-You can read more about it on the [CLI Overview](https://blitzjs.com/docs/cli-overview) documentation.
-
-## What's included?
-
-Here is the starting structure of your app.
-
-```
-todo-app
-├── README.md
-├── db
-│   ├── index.ts
-│   └── schema.prisma
-├── integrations
-├── mailers
-│   └── forgotPasswordMailer.ts
-├── next-env.d.ts
-├── next.config.js
-├── package.json
-├── public
-│   └── favicon.ico
-├── src
-│   ├── app
-│   │   ├── (auth)
-│   │   │   ├── components
-│   │   │   │   ├── ForgotPasswordForm.tsx
-│   │   │   │   ├── LoginForm.tsx
-│   │   │   │   ├── LogoutButton.tsx
-│   │   │   │   ├── ResetPasswordForm.tsx
-│   │   │   │   └── SignupForm.tsx
-│   │   │   ├── forgot-password
-│   │   │   │   └── page.tsx
-│   │   │   ├── layout.tsx
-│   │   │   ├── login
-│   │   │   │   └── page.tsx
-│   │   │   ├── mutations
-│   │   │   │   ├── changePassword.ts
-│   │   │   │   ├── forgotPassword.test.ts
-│   │   │   │   ├── forgotPassword.ts
-│   │   │   │   ├── login.ts
-│   │   │   │   ├── logout.ts
-│   │   │   │   ├── resetPassword.test.ts
-│   │   │   │   ├── resetPassword.ts
-│   │   │   │   └── signup.ts
-│   │   │   ├── reset-password
-│   │   │   │   └── page.tsx
-│   │   │   ├── signup
-│   │   │   │   └── page.tsx
-│   │   │   └── validations.ts
-│   │   ├── blitz-auth-config.ts
-│   │   ├── blitz-client.ts
-│   │   ├── blitz-server.ts
-│   │   ├── components
-│   │   │   ├── Form.tsx
-│   │   │   └── LabeledTextField.tsx
-│   │   ├── error.tsx
-│   │   ├── layout.tsx
-│   │   ├── loading.tsx
-│   │   ├── page.tsx
-│   │   ├── styles
-│   │   │   ├── Home.module.css
-│   │   │   └── globals.css
-│   │   └── users
-│   │       ├── hooks
-│   │       │   └── useCurrentUser.ts
-│   │       └── queries
-│   │           └── getCurrentUser.ts
-│   └── pages
-│       └── api
-│           └── rpc
-│               └── [[...blitz]].ts
-├── tsconfig.json
-└── types.ts
-```
-
-These files are:
-
-- The `src/` folder is a container for most of your project. This is where you’ll put any pages or API routes.
-
-- `db/` is where your database configuration goes. If you’re writing models or checking migrations, this is where to go.
-
-- `public/` is a folder where you will put any static assets. If you have images, files, or videos which you want to use in your app, this is where to put them.
-
-- `integrations/` is a folder to put all third-party integrations like with Stripe, Sentry, etc.
-
-- `test/` is a folder where you can put test utilities and integration tests.
-
-- `package.json` contains information about your dependencies and devDependencies. If you’re using a tool like `npm` or `yarn`, you won’t have to worry about this much.
-
-- `tsconfig.json` is our recommended setup for TypeScript.
-
-- `.babel.config.js`, `.eslintrc.js`, `.env`, etc. ("dotfiles") are configuration files for various bits of JavaScript tooling.
-
-- `blitz.config.ts` is for advanced custom configuration of Blitz. [Here you can learn how to use it](https://blitzjs.com/docs/blitz-config).
-
-- `vitest.config.ts` contains config for Vitest tests. You can [customize it if needed](https://vitejs.dev/config/).
-
-You can read more about it in the [File Structure](https://blitzjs.com/docs/file-structure) section of the documentation.
-
-### Tools included
-
-Blitz comes with a set of tools that corrects and formats your code, facilitating its future maintenance. You can modify their options and even uninstall them.
-
-- **ESLint**: It lints your code: searches for bad practices and tell you about it. You can customize it via the `.eslintrc.js`, and you can install (or even write) plugins to have it the way you like it. It already comes with the [`blitz`](https://github.com/blitz-js/blitz/tree/canary/packages/eslint-config) config, but you can remove it safely. [Learn More](https://blitzjs.com/docs/eslint-config).
-- **Husky**: It adds [githooks](https://git-scm.com/docs/githooks), little pieces of code that get executed when certain Git events are triggerd. For example, `pre-commit` is triggered just before a commit is created. You can see the current hooks inside `.husky/`. If are having problems commiting and pushing, check out ther [troubleshooting](https://typicode.github.io/husky/#/?id=troubleshoot) guide. [Learn More](https://blitzjs.com/docs/husky-config).
-- **Prettier**: It formats your code to look the same everywhere. You can configure it via the `.prettierrc` file. The `.prettierignore` contains the files that should be ignored by Prettier; useful when you have large files or when you want to keep a custom formatting. [Learn More](https://blitzjs.com/docs/prettier-config).
-
-## Learn more
-
-Read the [Blitz.js Documentation](https://blitzjs.com/docs/getting-started) to learn more.
-
-The Blitz community is warm, safe, diverse, inclusive, and fun! Feel free to reach out to us in any of our communication channels.
-
-- [Website](https://blitzjs.com)
-- [Discord](https://blitzjs.com/discord)
-- [Report an issue](https://github.com/blitz-js/blitz/issues/new/choose)
-- [Forum discussions](https://github.com/blitz-js/blitz/discussions)
-- [How to Contribute](https://blitzjs.com/docs/contributing)
-- [Sponsor or donate](https://github.com/blitz-js/blitz#sponsors-and-donations)
