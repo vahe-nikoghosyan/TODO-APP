@@ -1,11 +1,9 @@
-import { forwardRef, PropsWithoutRef, ComponentPropsWithoutRef } from "react"
+import { ComponentPropsWithoutRef, forwardRef, PropsWithoutRef } from "react"
 import { useFormContext } from "react-hook-form"
 import { ErrorMessage } from "@hookform/error-message"
 
 export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
-  /** Field name. */
   name: string
-  /** Field label. */
   label: string
   type?: "text" | "password" | "email" | "number" | "checkbox"
   outerProps?: PropsWithoutRef<JSX.IntrinsicElements["div"]>
@@ -21,12 +19,13 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
 
     return (
       <div {...outerProps}>
-        <label {...labelProps} className="my-1">
+        <label {...labelProps} className="my-4">
           {label}
           <input
             disabled={isSubmitting}
             {...register(name)}
             {...props}
+            ref={ref}
             className={
               props.type !== "checkbox"
                 ? "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
@@ -36,13 +35,13 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
         </label>
 
         <ErrorMessage
+          errors={errors}
+          name={name}
           render={({ message }) => (
-            <div role="alert" className="my-1 text-red-700">
+            <div role="alert" style={{ color: "red" }}>
               {message}
             </div>
           )}
-          errors={errors}
-          name={name}
         />
 
         <style jsx>{`

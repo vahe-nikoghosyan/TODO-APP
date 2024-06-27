@@ -1,4 +1,4 @@
-import { useState, ReactNode, PropsWithoutRef } from "react"
+import { PropsWithoutRef, ReactNode, useState } from "react"
 import { FormProvider, useForm, UseFormProps } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -55,7 +55,6 @@ export function Form<S extends z.ZodType<any, any>>({
         className="form"
         {...props}
       >
-        {/* Form fields supplied as children are rendered here */}
         {children}
 
         {formError && (

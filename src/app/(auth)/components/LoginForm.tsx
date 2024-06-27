@@ -6,8 +6,7 @@ import { Form, FORM_ERROR } from "src/app/components/Form"
 import login from "../mutations/login"
 import { Login } from "../validations"
 import { useMutation } from "@blitzjs/rpc"
-import { useSearchParams } from "next/navigation"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import type { Route } from "next"
 
 type LoginFormProps = {
